@@ -60,3 +60,5 @@ local Button = MainTab:CreateButton({
    Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/03yome/Script-color-game/82a2445c4041c1e2ddec49c641331a1bbaa85111/Script%20color%20game"))();
    end,
 })
+
+local MainSection = MainTab:CreateSection("Coming soon")
