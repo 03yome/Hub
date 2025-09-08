@@ -61,4 +61,31 @@ local Button = MainTab:CreateButton({
    end,
 })
 
-local MainSection = MainTab:CreateSection("Coming soon")
+local Button = MainTab:CreateButton({
+   Name = "script lol",
+   Callback = function()                             loadstring(game:HttpGet('https://raw.githubusercontent.com/03yome/Hhhhm/refs/heads/main/Ese'))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Antifling",
+   Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/Linux6699/DaHubRevival/main/AntiFling.lua'))()
+   end,
+})
+
+local MainTab = Window:CreateTab("Music🎵", nil)
+local MainSection = MainTab:CreateSection("no loop")
+
+local Button = MainTab:CreateButton({
+   Name = "Hacklord",
+   Callback = function() loadstring(game:HttpGet('https://raw.githubusercontent.com/03yome/HAck-Lord/refs/heads/main/No%20loop'))()
+   end,
+})
+
+local MainTab = Window:CreateTab("not my script", nil)
+
+local Button = MainTab:CreateButton({
+   Name = "script",
+   Callback = function() loadstring(game:HttpGet("https://raw.githubusercontent.com/03yome/Not-my-script/refs/heads/main/Script", true))()
+   end,
+})
