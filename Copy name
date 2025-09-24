@@ -1,0 +1,97 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- GUI chính
+local gui = Instance.new("ScreenGui")
+gui.Name = "PlayerListGui"
+gui.Parent = game.CoreGui
+
+-- Khung chính
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 250, 0, 300)
+frame.Position = UDim2.new(0.5, -125, 0.5, -150)
+frame.BackgroundColor3 = Color3.fromRGB(30,30,30)
+frame.Parent = gui
+
+-- Bo góc
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = frame
+
+-- Nút đóng
+local closeBtn = Instance.new("TextButton")
+closeBtn.Size = UDim2.new(0, 30, 0, 30)
+closeBtn.Position = UDim2.new(1, -35, 0, 5)
+closeBtn.Text = "X"
+closeBtn.Font = Enum.Font.GothamBold
+closeBtn.TextSize = 16
+closeBtn.BackgroundColor3 = Color3.fromRGB(200,50,50)
+closeBtn.TextColor3 = Color3.new(1,1,1)
+closeBtn.Parent = frame
+
+local c2 = Instance.new("UICorner")
+c2.CornerRadius = UDim.new(0,6)
+c2.Parent = closeBtn
+
+closeBtn.MouseButton1Click:Connect(function()
+    gui:Destroy()
+end)
+
+-- ScrollFrame chứa player
+local scroll = Instance.new("ScrollingFrame")
+scroll.Size = UDim2.new(1, -10, 1, -50) -- chừa chỗ cho nút close
+scroll.Position = UDim2.new(0, 5, 0, 40)
+scroll.CanvasSize = UDim2.new(0,0,0,0)
+scroll.BackgroundTransparency = 1
+scroll.Parent = frame
+
+-- Layout để xếp nút
+local layout = Instance.new("UIListLayout")
+layout.Padding = UDim.new(0, 5)
+layout.Parent = scroll
+
+-- Hàm tạo nút player
+local function createPlayerButton(plr)
+    local btn = Instance.new("TextButton")
+    btn.Size = UDim2.new(1, -10, 0, 40)
+    btn.Text = "@"..plr.Name
+    btn.Font = Enum.Font.GothamBold
+    btn.TextSize = 16
+    btn.BackgroundColor3 = Color3.fromRGB(80,80,80)
+    btn.TextColor3 = Color3.new(1,1,1)
+    btn.Parent = scroll
+    
+    local c = Instance.new("UICorner")
+    c.CornerRadius = UDim.new(0,8)
+    c.Parent = btn
+
+    btn.MouseButton1Click:Connect(function()
+        if setclipboard then
+            setclipboard(plr.Name)
+            print("✅ Copied username: "..plr.Name)
+        else
+            warn("⚠️ Executor không hỗ trợ setclipboard")
+        end
+    end)
+end
+
+-- Hàm cập nhật danh sách player
+local function updateList()
+    scroll:ClearAllChildren()
+    local layout = Instance.new("UIListLayout")
+    layout.Padding = UDim.new(0, 5)
+    layout.Parent = scroll
+
+    for _, plr in ipairs(Players:GetPlayers()) do
+        createPlayerButton(plr)
+    end
+
+    scroll.CanvasSize = UDim2.new(0,0,0,#Players:GetPlayers()*45)
+end
+
+-- Cập nhật khi có người vào/rời
+Players.PlayerAdded:Connect(updateList)
+Players.PlayerRemoving:Connect(updateList)
+
+-- Lần đầu load
+updateList()
