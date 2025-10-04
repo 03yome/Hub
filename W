@@ -1,0 +1,35 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("TONO", "DarkTheme")
+local Tab = Window:NewTab("speed")
+local Section = Tab:NewSection("speed")
+Section:NewSlider("speed", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+local Tab = Window:NewTab("Auto click")
+local Section = Tab:NewSection("Auto click")
+Section:NewButton("Auto click", "ButtonInfo", function()
+    print("Clicked")
+end)
+local Tab = Window:NewTab("TP")
+local Section = Tab:NewSection("Tp")
+Section:NewButton("1.2x", "ButtonInfo", function()
+    print("Clicked")
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2084.43042, 17.0009956, 1542.8125, -0.0136085646, -3.28704779e-08, -0.999907374, 9.71141922e-09, 1, -3.30056906e-08, 0.999907374, -1.01596802e-08, -0.0136085646)game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2084.43042, 17.0009956, 1542.8125, -0.0136085646, -3.28704779e-08, -0.999907374, 9.71141922e-09, 1, -3.30056906e-08, 0.999907374, -1.01596802e-08, -0.0136085646)
+end)
+Section:NewButton("1.2x Strength Boost", "ButtonInfo", function()
+    print("Clicked")
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3165.88647, 48.2009583, 1238.17688, 0.0279229432, -8.61719496e-09, -0.999610066, -1.20770705e-09, 1, -8.65429239e-09, 0.999610066, 1.44888945e-09, 0.0279229432)
+end)
+
+Section:NewButton("1.2x", "ButtonInfo", function()
+    print("Clicked")
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3504.66382, 681.815552, 1263.41772, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
+
+while wait() do
+game:GetService("Players").LocalPlayer.Character:WaitForChild("Weight"):WaitForChild("ToolScript"):WaitForChild("Lift"):FireServer()
+end
+_G.Hee = true
+while _G.Hee do wait()
+game:GetService("Players").LocalPlayer.Character:WaitForChild("Drink"):WaitForChild("ToolScript"):WaitForChild("Drink"):FireServer()
+end
