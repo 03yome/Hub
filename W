@@ -21,7 +21,7 @@ Section:NewButton("1.2x Strength Boost", "ButtonInfo", function()
  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3165.88647, 48.2009583, 1238.17688, 0.0279229432, -8.61719496e-09, -0.999610066, -1.20770705e-09, 1, -8.65429239e-09, 0.999610066, 1.44888945e-09, 0.0279229432)
 end)
 
-Section:NewButton("1.2x", "ButtonInfo", function()
+Section:NewButton("1.3x", "ButtonInfo", function()
     print("Clicked")
  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3504.66382, 681.815552, 1263.41772, 1, 0, 0, 0, 1, 0, 0, 0, 1)
 end)
