@@ -1,0 +1,84 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("[Find.S] by 03y_o [all games]", "Ocean")
+
+local Tab = Window:NewTab("Find.S")
+local Section = Tab:NewSection("Server.p")
+
+Section:NewButton("1", "50/50", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/1"))()
+end)
+
+Section:NewButton("2", "80", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/2", true))()
+end)
+
+Section:NewButton("3", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/3", true))()
+end)
+
+Section:NewButton("4", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/4"))()
+end)
+
+Section:NewButton("5", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/5"))()
+end)
+
+Section:NewButton("6", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/6"))()
+end)
+
+Section:NewButton("7", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/7"))()
+end)
+
+Section:NewButton("8", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/8"))()
+end)
+
+Section:NewButton("9", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/9"))()
+end)
+
+Section:NewButton("10", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/10"))()
+end)
+
+Section:NewButton("11", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/11"))()
+end)
+
+Section:NewButton("12", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/12"))()
+end)
+
+local Tab = Window:NewTab("Basic")
+local Section = Tab:NewSection("idk") 
+
+Section:NewButton("12", "100", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/x5oz6/Server/refs/heads/main/Rejoin"))()
+end)
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ScreenGui"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+ 
+local Toggle = Instance.new("TextButton")
+Toggle.Name = "Toggle"
+Toggle.Parent = ScreenGui
+Toggle.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Toggle.Position = UDim2.new(0, 0, 0.454706937, 0)
+Toggle.Size = UDim2.new(0, 90, 0, 38)
+Toggle.Font = Enum.Font.SourceSans
+Toggle.Text = "Hide"
+Toggle.TextColor3 = Color3.fromRGB(248, 248, 248)
+Toggle.TextSize = 28.000
+Toggle.Draggable = true
+Toggle.MouseButton1Click:connect(function()
+    Library:ToggleUI()
+end)
+ 
+local Corner = Instance.new("UICorner")
+Corner.Name = "Corner"
+Corner.Parent = Toggl
