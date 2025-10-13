@@ -67,3 +67,15 @@ return g(0)
 end)
 print("HI")
 end)
+
+KillingCheats:CreateButton("no cooldown", function()
+local args = {
+	game:GetService("Players").LocalPlayer.Character,
+	"Green Lantern",
+	"Shield",
+	CFrame.new(-579.611328125, 333.56121826171875, 192.47897338867188, -0.9599436521530151, 0.020829733461141586, -0.2794179916381836, 1.862645149230957e-09, 0.9972329139709473, 0.0743405669927597, 0.2801933288574219, 0.07136275619268417, -0.9572873115539551)
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Abilities"):FireServer(unpack(args))
+
+print("HI")
+end)
