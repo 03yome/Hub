@@ -1,0 +1,170 @@
+
+pcall(function() 
+    setfflag("HumanoidParallelRemoveNoPhysics", "False") 
+    setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False") 
+end)
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local MinimizeButton = Instance.new("TextButton")
+local CloseButton = Instance.new("TextButton")
+local StatusLabel = Instance.new("TextLabel")
+local InfiniteJumpButton = Instance.new("TextButton")
+local CreditsButton = Instance.new("TextButton")
+
+ScreenGui.Name = "Infjump"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ResetOnSpawn = false
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.4, 0, 0.4, 0)
+MainFrame.Size = UDim2.new(0, 250, 0, 150)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "Infinite Jump"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 20
+
+MinimizeButton.Name = "MinimizeButton"
+MinimizeButton.Parent = MainFrame
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MinimizeButton.Position = UDim2.new(1, -60, 0, 0)
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Font = Enum.Font.SourceSansBold
+MinimizeButton.Text = "-"
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 0)
+MinimizeButton.TextSize = 20
+
+CloseButton.Name = "CloseButton"
+CloseButton.Parent = MainFrame
+CloseButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+CloseButton.Position = UDim2.new(1, -30, 0, 0)
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Font = Enum.Font.SourceSansBold
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+CloseButton.TextSize = 20
+
+StatusLabel.Name = "StatusLabel"
+StatusLabel.Parent = MainFrame
+StatusLabel.BackgroundTransparency = 1
+StatusLabel.Position = UDim2.new(0, 0, 0, 30)
+StatusLabel.Size = UDim2.new(1, 0, 0, 20)
+StatusLabel.Font = Enum.Font.SourceSans
+StatusLabel.Text = "Status: Off"
+StatusLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+StatusLabel.TextSize = 16
+
+InfiniteJumpButton.Name = "InfiniteJumpButton"
+InfiniteJumpButton.Parent = MainFrame
+InfiniteJumpButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+InfiniteJumpButton.Position = UDim2.new(0.1, 0, 0.4, 0)
+InfiniteJumpButton.Size = UDim2.new(0.8, 0, 0, 30)
+InfiniteJumpButton.Font = Enum.Font.SourceSansBold
+InfiniteJumpButton.Text = "Infinite Jump"
+InfiniteJumpButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+InfiniteJumpButton.TextSize = 18
+
+CreditsButton.Name = "CreditsButton"
+CreditsButton.Parent = MainFrame
+CreditsButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+CreditsButton.Position = UDim2.new(0.1, 0, 0.7, 0)
+CreditsButton.Size = UDim2.new(0.8, 0, 0, 30)
+CreditsButton.Font = Enum.Font.SourceSansBold
+CreditsButton.Text = "Credits"
+CreditsButton.TextColor3 = Color3.fromRGB(255, 255, 0)
+CreditsButton.TextSize = 18
+
+--// Infinite Jump Logic
+local UIS = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+local infJumpEnabled = false
+
+-- function to enable jumping logic
+local function applyInfiniteJump(character)
+    local humanoid = character:WaitForChild("Humanoid", 5)
+    if not humanoid then return end
+    UIS.JumpRequest:Connect(function()
+        if infJumpEnabled and humanoid and humanoid.Parent then
+            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        end
+    end)
+end
+
+-- initial character
+if player.Character then
+    applyInfiniteJump(player.Character)
+end
+
+-- re-apply every respawn
+player.CharacterAdded:Connect(function(char)
+    if infJumpEnabled then
+        applyInfiniteJump(char)
+    end
+end)
+
+InfiniteJumpButton.MouseButton1Click:Connect(function()
+    infJumpEnabled = not infJumpEnabled
+    StatusLabel.Text = infJumpEnabled and "Status: On" or "Status: Off"
+    if infJumpEnabled and player.Character then
+        applyInfiniteJump(player.Character)
+    end
+end)
+
+-- Fade toggle Credits
+local showingCredits = false
+CreditsButton.MouseButton1Click:Connect(function()
+    showingCredits = not showingCredits
+    local TweenService = game:GetService("TweenService")
+    local tweenInfo = TweenInfo.new(0.4, Enum.EasingStyle.Sine, Enum.EasingDirection.Out)
+
+    local fadeOut = TweenService:Create(CreditsButton, tweenInfo, {
+        TextTransparency = 1
+    })
+    fadeOut:Play()
+    fadeOut.Completed:Connect(function()
+        CreditsButton.Text = showingCredits and "Made By 03y_o" or "Credits"
+        CreditsButton.TextTransparency = 1
+        CreditsButton.TextColor3 = Color3.fromRGB(255, 255, 0)
+        local fadeIn = TweenService:Create(CreditsButton, tweenInfo, {
+            TextTransparency = 0
+        })
+        fadeIn:Play()
+    end)
+end)
+
+-- Minimize / Close
+MinimizeButton.MouseButton1Click:Connect(function()
+    if MainFrame.Size == UDim2.new(0, 250, 0, 150) then
+        MainFrame:TweenSize(UDim2.new(0, 250, 0, 30), "Out", "Sine", 0.3, true)
+        for _, v in pairs(MainFrame:GetChildren()) do
+            if v ~= Title and v ~= MinimizeButton and v ~= CloseButton then
+                v.Visible = false
+            end
+        end
+    else
+        MainFrame:TweenSize(UDim2.new(0, 250, 0, 150), "Out", "Sine", 0.3, true)
+        for _, v in pairs(MainFrame:GetChildren()) do
+            v.Visible = true
+        end
+    end
+end)
+
+CloseButton.MouseButton1Click:Connect(function()
+    ScreenGui:Destroy()
+end)
+
+-- Fade in effect
+ScreenGui.Enabled = false
+task.wait(0.1)
+ScreenGui.Enabled = true
