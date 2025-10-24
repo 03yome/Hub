@@ -1,0 +1,41 @@
+-- 🧭 Hiển tọa độ nhân vật bằng GUI (Client)
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+
+-- 📦 Tạo GUI chính
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "CoordsDisplay"
+ScreenGui.ResetOnSpawn = false
+ScreenGui.Parent = game.CoreGui
+
+-- 🪧 Tạo khung hiển thị tọa độ
+local Label = Instance.new("TextLabel")
+Label.Size = UDim2.new(0, 250, 0, 50)
+Label.Position = UDim2.new(0.5, -125, 0.05, 0) -- giữa màn hình phía trên
+Label.BackgroundTransparency = 0.3
+Label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Label.TextColor3 = Color3.fromRGB(0, 255, 0)
+Label.TextSize = 20
+Label.Font = Enum.Font.SourceSansBold
+Label.Text = "📍 Toạ độ: Đang tải..."
+Label.Parent = ScreenGui
+
+-- 🎛️ Cho phép kéo di chuyển label
+local UserInputService = game:GetService("UserInputService")
+local dragging, dragInput, dragStart, startPos
+
+Label.Active = true
+Label.Draggable = true -- Cho phép kéo GUI
+
+-- 🔁 Cập nhật tọa độ liên tục
+RunService.RenderStepped:Connect(function()
+	local char = player.Character
+	local hrp = char and char:FindFirstChild("HumanoidRootPart")
+	if hrp then
+		local pos = hrp.Position
+		Label.Text = string.format("📍 Toạ độ:\nX=%.1f | Y=%.1f | Z=%.1f", pos.X, pos.Y, pos.Z)
+	else
+		Label.Text = "📍 Toạ độ: Nhân vật chưa xuất hiện"
+	end
+end)
